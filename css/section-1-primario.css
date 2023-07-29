@@ -1,0 +1,59 @@
+.section-section-1-primario {
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px;
+}
+
+.conteudo-1-corpo {
+    margin-top: 50px;
+}
+
+.conteudo-1-corpo h1 {
+    font-size: 2.5rem;
+    color: rgb(57, 57, 57);
+    text-align: center;
+}
+
+.card-1-primario {
+    display: flex;
+    margin-top: 50px;
+    gap: 1rem;
+}
+
+.bloco-1 {
+    background-color: azure;
+    padding: 50px;
+    width: 100%;
+}
+
+.bloco-1 i {
+    color: #000000ad;
+    font-size: 2rem;
+}
+.bloco-1 h3 {
+    margin-top: 20px;
+    color: #000000ad;
+}
+.bloco-1 p {
+    margin-top: 20px;
+    color: #000000ad;
+}
+
+@media screen and (max-width:768px) {
+    .conteudo-1-corpo h1 {
+        font-size: 1.5rem;
+        color: rgb(57, 57, 57);
+        text-align: center;
+    }
+    .card-1-primario {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 10px 10px 10px;
+        gap: 1rem;
+    }
+    .bloco-1 {
+        background-color: azure;
+        padding: 30px;
+        width: 100%;
+    }
+}
