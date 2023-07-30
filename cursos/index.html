@@ -12,7 +12,7 @@
     <!-- ICONS -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- ESTILO CSS -->
-    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="../css/all.css">
 </head>
 <body>
 
@@ -20,21 +20,31 @@
     <header class="header-primario">
         <nav class="nav-primario">
 
-            <ul class="categorias">
-                <a href="#" class="logo">
-                    <img src="Logo-branca-cyber.png" alt="Logo">
-                </a>
+            <div class="menu-lg">
+                <div class="logo">
+                    <img src="#" alt="">
+                </div>
 
-                <br><br>
+                <i class="ph ph-list" id="menu-icon"></i>
 
-                <i class="ph ph-list"></i>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Soluções</a></li>
-                <li><a href="#">Academy</a></li>
-                <li><a href="#">Cursos</a></li>
-                <li><a href="#">Ajuda</a></li>
-                <li><a href="#">Políticas</a></li>
-            </ul>
+                <ul class="categorias" id="mobileMenu">
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#solucoes">Soluções</a></li>
+                    <li><a href="#">Academy</a></li>
+                    <li><a href="#">Cursos</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                    <li><a href="#">Políticas</a></li>
+
+                    <div class="login-mobile">
+                        <a href="#" class="link-lg cadastro">
+                            Cadastre-se
+                        </a>
+                        <a href="#" class="link-lg log">
+                            Entrar
+                        </a>
+                    </div>
+                </ul>
+            </div>
 
             <div class="login">
                 <a href="#" class="link-lg cadastro">
@@ -47,17 +57,7 @@
         </nav>
     </header>
 
-    <!-- =================== MAIN =================== -->
-    <main id="main-primario">
-
-    </main>
-
-    <!-- =================== FOOTER =================== -->
-    <footer id="footer-primario">
-        
-    </footer>
-
     <!-- JAVASCRIPT -->
-    <script src="js/menu.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 </html>
