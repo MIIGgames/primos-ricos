@@ -1,0 +1,39 @@
+#footer-primario {
+    background-color: #fff;
+    margin-top: 50px;
+}
+
+.footer {
+    max-width: 1400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.footer hr {
+    color: #cccccc37;
+    height: 0.1vh;
+}
+
+.desc-footer {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.desc-footer a {
+    text-decoration: none;
+    color: #000;
+    margin-top: 20px;
+}
+
+.desc-footer a:hover {
+    color: #5e17eb;
+    border-bottom: 1px solid #5e17eb;
+    transition: 0.5s;
+    transform: scaleX(10);
+}
+
+.desc-footer p {
+    margin-top: 20px;
+    color: #2a2929;
+    width: 600px;
+}
