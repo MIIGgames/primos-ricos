@@ -10,6 +10,14 @@
 @import "footer-primario.css";
 
 /* ESTILO CSS - Pagina dos Cursos */
+@import "banner-cursos.css";
+
+/* ESTILO CSS - Pagina de conversão - button */
+@import "conversao.css";
+
+/* ESTILO CSS - Cadastro e Login */
+@import "login.css";
+@import "cadastro.css";
 
 /* ESTILO GERAL */
 * {
