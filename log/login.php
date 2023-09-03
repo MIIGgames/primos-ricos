@@ -8,9 +8,11 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
         <p id="error-message" class="error-message"></p>
         <form id="loginForm" action="autenticar.php" method="POST">
+            <div class="img-logo-cadastro">
+                <img src="../img/Logo-Icon-Extenso.png" alt="">
+            </div>
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" required>
             
