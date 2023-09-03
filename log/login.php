@@ -9,6 +9,7 @@
 <body>
     <div class="login-container">
         <p id="error-message" class="error-message"></p>
+        
         <form id="loginForm" action="autenticar.php" method="POST">
             <div class="img-logo-cadastro">
                 <img src="../img/Logo-Icon-Extenso.png" alt="">

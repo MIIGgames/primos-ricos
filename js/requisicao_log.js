@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     // Redirecionar para "index.html" após login bem-sucedido
-                    window.location.href = "index.html";
+                    window.location.href = "../cursos/index.php";
                 } else {
                     // Exibir mensagem de erro
                     errorMessageBox.textContent = "Usuário ou senha incorretos.";

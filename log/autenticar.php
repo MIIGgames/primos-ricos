@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["user_id"] = $id;
 
             // Redirecionar para "index.php" após login bem-sucedido
-            header("Location: index.php");
+            header("Location: ../cursos/index.php");
             exit;
         } else {
             // Login falhou
