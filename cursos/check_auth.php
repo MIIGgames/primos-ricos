@@ -4,7 +4,7 @@ session_start();
 // Verificar se o usuário está logado
 if (!isset($_SESSION["user_id"])) {
     // Se o usuário não estiver logado, redirecione para a página de login
-    header("Location: login.php");
+    header("Location: ../log/login.php");
     exit;
 }
 
@@ -13,7 +13,7 @@ if (isset($_SESSION["last_activity"]) && (time() - $_SESSION["last_activity"] > 
     // Se passaram mais de 24 horas, destrua a sessão e redirecione para a página de login
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: ../log/login.php");
     exit;
 }
 

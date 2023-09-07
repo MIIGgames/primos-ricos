@@ -63,3 +63,47 @@ button:hover {
     text-align: center;
     margin-bottom: 20px;
 }
+
+@media (max-width:768px) {
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #cccccc24;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+    #loginForm {
+        background-color: #fff;
+        margin: 5% auto;
+        width: 80%;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 1px #57565613;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 10px;
+        color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        width: 98%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    button {
+        background-color: #5e17eb;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+    }
+}

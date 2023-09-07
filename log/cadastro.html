@@ -15,21 +15,145 @@
         <br>
         <label for="nome">Nome Completo:</label>
         <input type="text" id="nome" name="nome" required>
+        <p id="nome-mensagem" class="mensagem-erro"></p>
         
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required>
+        <p id="email-mensagem" class="mensagem-erro"></p>
         
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
+        <div class="senha-container">
+            <input type="password" id="senha" name="senha" required>
+            <button type="button" id="mostrar-senha" onclick="mostrarSenha()">Mostrar Senha</button>
+        </div>
+        <p id="senha-mensagem" class="mensagem-erro"></p>
+        <script>
+            function mostrarSenha() {
+            const campoSenha = document.getElementById("senha");
+            const botaoMostrarSenha = document.getElementById("mostrar-senha");
+
+            if (campoSenha.type === "password") {
+                campoSenha.type = "text";
+                botaoMostrarSenha.textContent = "Ocultar Senha";
+            } else {
+                campoSenha.type = "password";
+                botaoMostrarSenha.textContent = "Mostrar Senha";
+            }
+        }
+        </script>
+        
         
         <label for="cpf">CPF:</label>
         <input type="text" id="cpf" name="cpf" required>
+        <p id="cpf-mensagem" class="mensagem-erro"></p>
         
         <label for="data_nascimento">Data de Nascimento:</label>
         <input type="date" id="data_nascimento" name="data_nascimento" required>
         
         <button type="submit">Cadastrar</button>
+        <p id="mensagem-erro" class="mensagem-erro invisivel">Corrija os erros acima para continuar.</p>
+        <br><br>
+        <a href="login.php">Ja tenho conta</a>
     </form>
     <script src="../js/requisicao_log.js"></script>
+    <script src="../js/verificar_duplicatas.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const formulario = document.getElementById("cadastroForm");
+        const campos = ["cpf", "nome", "email"];
+        const mensagensErro = {};
+
+        campos.forEach(campo => {
+            const inputCampo = document.getElementById(campo);
+            const mensagemElement = document.getElementById(`${campo}-mensagem`);
+            mensagensErro[campo] = mensagemElement;
+
+            inputCampo.addEventListener("blur", function () {
+                const valorCampo = inputCampo.value.trim();
+                if (valorCampo !== "") {
+                    verificarDuplicata(campo, valorCampo);
+                }
+            });
+        });
+
+        function verificarDuplicata(campo, valor) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const mensagem = xhr.responseText;
+                    const mensagemElement = mensagensErro[campo];
+                    mensagemElement.textContent = mensagem;
+                    validarFormulario(); // Chama a função para validar o formulário após cada verificação
+                }
+            };
+
+            xhr.open("POST", "verificar_duplicatas.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(`campo=${campo}&valor=${valor}`);
+        }
+
+        function validarFormulario() {
+            let todasAsMensagensVazias = true;
+
+            // Verifica se todas as mensagens de erro estão vazias
+            campos.forEach(campo => {
+                const mensagemElement = mensagensErro[campo];
+                if (mensagemElement.textContent.trim() !== "") {
+                    todasAsMensagensVazias = false;
+                }
+            });
+
+            // Habilita ou desabilita o botão "Cadastrar" com base nas mensagens de erro
+            const botaoCadastrar = document.querySelector("button[type='submit']");
+            botaoCadastrar.disabled = !todasAsMensagensVazias;
+
+            // Exibe a mensagem de erro geral se houver algum erro
+            const mensagemErroGeral = document.getElementById("mensagem-erro");
+            if (!todasAsMensagensVazias) {
+                mensagemErroGeral.classList.remove("invisivel");
+            } else {
+                mensagemErroGeral.classList.add("invisivel");
+            }
+        }
+    });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const campoSenha = document.getElementById("senha");
+        const iconeSenha = document.getElementById("icone-senha");
+
+        iconeSenha.addEventListener("click", function () {
+            if (campoSenha.type === "password") {
+                campoSenha.type = "text";
+                iconeSenha.classList.add("mostrar");
+            } else {
+                campoSenha.type = "password";
+                iconeSenha.classList.remove("mostrar");
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const campoSenha = document.getElementById("senha");
+    const senhaMensagem = document.getElementById("senha-mensagem");
+
+    campoSenha.addEventListener("input", function () {
+        const senha = campoSenha.value;
+
+        if (senha.length < 8 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
+            senhaMensagem.textContent = "A senha deve ter pelo menos 8 caracteres, incluindo letras e números.";
+        } else {
+            senhaMensagem.textContent = "";
+
+            // Verifique se a senha é fraca (por exemplo, senha123 ou 12345678)
+            if (/^[A-Za-z]*$|^\d*$|^(.)\1+$/.test(senha)) {
+                senhaMensagem.textContent = "Sua senha está fraca. Use uma senha mais segura com combinações de caracteres.";
+            }
+        }
+    });
+});
+
+    </script>
+
 </body>
 </html>

@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssss", $nome, $email, $senha, $cpf, $dataNascimento);
 
     if ($stmt->execute()) {
-        echo "Cadastro realizado com sucesso! Enviamos um e-mail para você continuar o processo na Maond";
+        header("Location: login.php");
+        //echo "Cadastro realizado com sucesso! Enviamos um e-mail para você continuar o processo na Maond";
     } else {
         echo "Erro no cadastro: " . $stmt->error;
     }

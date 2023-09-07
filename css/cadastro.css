@@ -19,7 +19,7 @@ h1 {
 
 #cadastroForm {
     background-color: #fff;
-    margin: 3% auto;
+    margin: 1% auto;
     width: 500px;
     padding: 40px;
     border-radius: 10px;
@@ -57,4 +57,81 @@ button {
 
 button:hover {
     background-color: #38069e;
+}
+
+.invisivel {
+    display: none;
+    color: red;
+}
+
+.mensagem-erro {
+    color: red;
+}
+
+/* Estilização do container do campo de senha */
+.senha-container {
+    position: relative;
+}
+
+/* Estilização do ícone de mostrar/ocultar senha */
+#icone-senha {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #333; /* Cor padrão do ícone */
+}
+
+#icone-senha.mostrar {
+    color: #007bff; /* Cor quando a senha está visível */
+}
+
+#mostrar-senha {
+    background-color: red;
+    position: absolute;
+    right: -0;
+    bottom: 10px;
+    width: 150px;
+    padding: 10px;
+    background-color: #5e17eb;
+}
+
+@media screen and (max-width:768px) {
+    #cadastroForm {
+        background-color: #fff;
+        margin: 1% auto;
+        width: 80%;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 1px #57565613;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    #mostrar-senha {
+        background-color: red;
+        position: absolute;
+        right: -1px;
+        bottom: 10px;
+        width: 150px;
+        padding: 12px;
+        background-color: #5e17eb;
+    }
+    button {
+        background-color: #5e17eb;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+    }
 }

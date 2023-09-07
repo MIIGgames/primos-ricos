@@ -21,6 +21,8 @@
             <input type="password" id="senha" name="senha" required>
             
             <button type="submit" id="loginButton">Login</button>
+            <br><br>
+            <a href="cadastro.html">Cadastre-se</a>
         </form>
         <p><a href="#">Esqueci minha senha</a></p>
     </div>

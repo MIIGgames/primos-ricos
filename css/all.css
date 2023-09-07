@@ -19,6 +19,9 @@
 @import "login.css";
 @import "cadastro.css";
 
+/* ESTILO CSS -  Curso _ Dashboard */
+@import "dashboard.css";
+
 /* ESTILO GERAL */
 * {
     padding: 0;
