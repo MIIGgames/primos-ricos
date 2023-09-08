@@ -59,7 +59,7 @@ $conn->close();
     <link rel="stylesheet" href="../css/dashboard.css">
 
 </head>
-<body>
+<body id="body-dashboard-index-php">
     <!--<p><?php echo $nomeUsuario;?></p> -->
 
     <div class="flex-dashboard">
@@ -87,7 +87,7 @@ $conn->close();
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../marketplace/variados.php">
                             <i class="ph-bold ph-shopping-cart"></i>
                             <h3>Marketplace</h3>
                         </a>
