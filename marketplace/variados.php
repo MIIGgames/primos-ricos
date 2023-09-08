@@ -93,11 +93,11 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- ESTILO CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="..css/marketplace.css">
+    <link rel="stylesheet" href="../css/marketplace.css">
 
 </head>
 
-<body>
+<body id="body-dashboard-index-php">
     <!--<p><?php echo $nomeUsuario; ?></p> -->
 
     <div class="flex-dashboard">
@@ -125,7 +125,7 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="variados.php">
                             <i class="ph-bold ph-shopping-cart"></i>
                             <h3>Marketplace</h3>
                         </a>
@@ -149,7 +149,7 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../log/login.php">
                             <i class="ph-bold ph-sign-out"></i>
                             <h3>Sair</h3>
                         </a>
@@ -171,12 +171,12 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </header>
 
-            <div class="dashboard-main">
+            <div class="dashboard-main marketplace">
                 <h2>Produtos mais vendidos da Maond</h2>
 
                 <div class="marketplace-main-grid">
                     <div class="container-marketplace">
-                        
+
                         <!-- Menu de Categorias -->
                         <ul class="menu-categorias">
                             <li><a href="plr.php">PLR</a></li>
@@ -185,17 +185,20 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </ul>
 
                         <!-- Exibição de Cursos da Categoria "Variados" -->
-                        <h2>Categoria Variados</h2>
+                        <br>
                         <div class="cards-container">
                             <?php foreach ($cursosVariados as $curso) { ?>
                                 <div class="curso-card">
-                                    <h3><?php echo $curso['titulo']; ?></h3>
-                                    <p><?php echo $curso['descricao']; ?></p>
-                                    <p><strong>Valor: R$ <?php echo number_format($curso['valor'], 2, ',', '.'); ?></strong></p>
-                                    <p>Data do Curso: <?php echo $curso['data_curso']; ?></p>
-                                    <a href="#" class="ver-mais-btn">Ver Mais</a>
+                                <img src="<?php echo $curso['imagem_curso']; ?>" alt="Imagem do Curso">
+                                    <div class="desc-cursos-marketplace">
+                                        <h3><?php echo $curso['titulo']; ?></h3>
+                                        <p><?php echo $curso['descricao']; ?></p>
+                                        <p><strong>Valor: R$ <?php echo number_format($curso['valor'], 2, ',', '.'); ?></strong></p>
+                                        <p>Data do Curso: <?php echo $curso['data_curso']; ?></p>
+                                        <a href="#" class="ver-mais-btn">Ver Mais</a>
+                                    </div>
                                 </div>
-                            <?php } ?>
+                                <?php } ?>
                         </div>
                     </div>
                 </div>

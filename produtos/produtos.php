@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 $inactivityTimeout = 20 * 3600; // 20 horas em segundos
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactivityTimeout)) {
     // Se o tempo de inatividade expirou, redirecione para o logout ou outra página
-    header("Location: ../log/login.php"); // Redireciona para uma página de logout, por exemplo
+    header("Location: logout.php"); // Redireciona para uma página de logout, por exemplo
     exit();
 }
 
@@ -69,7 +69,7 @@ try {
 
 // Consultar os cursos na categoria "variados" no banco de dados
 $stmt = $pdo->prepare("SELECT cursos.* FROM cursos JOIN categorias_cursos ON cursos.categoria_id = categorias_cursos.id WHERE categorias_cursos.nome_categoria = ?");
-$stmt->execute(['plr']);
+$stmt->execute(['variados']);
 $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -171,92 +171,15 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </header>
 
-            <div class="dashboard-main marketplace">
-                <h2>Produtos mais vendidos da Maond</h2>
-
-                <div class="marketplace-main-grid">
-                    <div class="container-marketplace">
-
-                        <!-- Menu de Categorias -->
-                        <ul class="menu-categorias">
-                            <li><a href="plr.php">PLR</a></li>
-                            <li><a href="encapsulados.php">Encapsulados</a></li>
-                            <li><a href="cosmeticos.php">Cosméticos</a></li>
-                        </ul>
-
-                        <!-- Exibição de Cursos da Categoria "Variados" -->
-                        <br>
-                        <div class="cards-container">
-                            <?php foreach ($cursosVariados as $curso) { ?>
-                                <div class="curso-card">
-                                    <img src="<?php echo $curso['imagem_curso']; ?>" alt="Imagem do Curso">
-                                    <div class="desc-cursos-marketplace">
-                                        <h3><?php echo $curso['titulo']; ?></h3>
-                                        <p>
-                                            <?php
-                                            $descricao = $curso['descricao'];
-                                            $descricaoResumida = substr($descricao, 0, 90);
-                                            echo $descricaoResumida;
-                                            if (strlen($descricao) > 90) {
-                                                echo '...';
-                                            }
-                                            ?>
-                                        </p>
-                                        <p><strong>Comissão: R$ <?php echo number_format($curso['valor'], 2, ',', '.'); ?></strong></p>
-                                        <br>
-                                        <a href="#" class="ver-mais-btn" data-curso-id="<?php echo $curso['id']; ?>">Ver Mais</a>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
+            <div class="dashboard-main produtos">
+                <h2>Produtos</h2>
+                <p>Nós pedimos desculpas, mas esse serviço não está disponivel no mometo, não se preocupe em breve estará de volta.</p>
             </div>
         </main>
-
-        <div id="curso-detalhes"></div>
     </div>
-
 
     <!-- JAVASCRIPT -->
     <script src="../js/menu-dashboard.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $(".ver-mais-btn").click(function(e) {
-                e.preventDefault();
-                var cursoId = $(this).data("curso-id");
-                var detalhesDiv = $("#curso-detalhes");
-
-                // Use Ajax para buscar as informações detalhadas do curso com o ID correspondente
-                $.ajax({
-                    url: "buscar_curso.php",
-                    method: "GET",
-                    data: {
-                        id: cursoId
-                    },
-                    success: function(response) {
-                        // Exiba as informações detalhadas do curso na div de detalhes com uma transição suave
-                        detalhesDiv.html(response).slideDown(300);
-                    },
-                    error: function() {
-                        alert("Erro ao buscar detalhes do curso.");
-                    }
-                });
-            });
-
-            // Adicione um evento para fechar as informações detalhadas
-            $(document).on('click', '.fechar-btn', function() {
-                var detalhesDiv = $("#curso-detalhes");
-                detalhesDiv.slideUp(300, function() {
-                    detalhesDiv.empty(); // Limpar o conteúdo após fechar
-                });
-            });
-        });
-    </script>
-
-
 </body>
 
 </html>

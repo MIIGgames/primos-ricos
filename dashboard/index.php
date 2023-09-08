@@ -81,7 +81,7 @@ $conn->close();
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../produtos/produtos.php">
                             <i class="ph-bold ph-tag"></i>
                             <h3>Produtos</h3>
                         </a>
@@ -111,7 +111,7 @@ $conn->close();
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../log/login.php">
                             <i class="ph-bold ph-sign-out"></i>
                             <h3>Sair</h3>
                         </a>
