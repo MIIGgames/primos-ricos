@@ -46,7 +46,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- TITULO -->
-    <title>Cursos - Maond</title>
+    <title>Dashboard - Maond</title>
     <!-- FAICON -->
     <link rel="shortcut icon" href="../img/Logo-Maond.png" type="image/x-icon">
     <!-- ====================== FONT ROBOTO ======================== -->
@@ -57,6 +57,7 @@ $conn->close();
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- ESTILO CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
+
 </head>
 <body>
     <!--<p><?php echo $nomeUsuario;?></p> -->
@@ -74,7 +75,7 @@ $conn->close();
             <div class="menu">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="index.php">
                             <i class="ph-bold ph-house"></i>
                             <h3>Dashboard</h3>
                         </a>
@@ -134,6 +135,10 @@ $conn->close();
 
             <div class="dashboard-main">
                 <h2>Dashboard</h2>
+
+                <div class="dashboard-main-grid">
+                    
+                </div>
             </div>
         </main>
     </div>
