@@ -1,63 +1,44 @@
-<?php
-session_start();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-
-    // Informações de conexão com o banco de dados
+    <?php
+    // Conecte-se ao banco de dados (substitua com suas credenciais)
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "usuarios_maond";
 
-    // Criar uma conexão com o banco de dados
+    // Crie uma conexão com o banco de dados
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verificar a conexão
+    // Verifique a conexão
     if ($conn->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+        die("Falha na conexão com o banco de dados: " . $conn->connect_error);
     }
 
-    // Consultar o banco de dados para verificar o login
-    $stmt = $conn->prepare("SELECT id, senha FROM usuarios WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    // Suponha que o ID do usuário seja 1 (você deve adaptar isso à sua autenticação)
+    $userId = 1;
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $senha_hash);
-        $stmt->fetch();
+    // Consulta SQL para buscar os cursos afiliados pelo usuário
+    $sql = "SELECT cursos.titulo, cursos.descricao, cursos.valor, cursos.data_curso
+            FROM afiliacoes
+            JOIN cursos ON afiliacoes.curso_id = cursos.id
+            WHERE afiliacoes.usuario_id = $userId";
 
-        if (password_verify($senha, $senha_hash)) {
-            // Login bem-sucedido
-            $_SESSION["user_id"] = $id;
+    // Execute a consulta
+    $result = $conn->query($sql);
 
-            // Redirecionar para "index.php" após login bem-sucedido
-            header("Location: ../cursos/index.php");
-            exit;
-        } else {
-            // Login falhou
-            $_SESSION["login_attempts"] = isset($_SESSION["login_attempts"]) ? $_SESSION["login_attempts"] + 1 : 1;
-
-            if ($_SESSION["login_attempts"] >= 10) {
-                // Bloquear o usuário por 5 minutos
-                $_SESSION["login_blocked"] = time() + 300; // 300 segundos (5 minutos)
-            }
-
-            // Redirecionar de volta para a página de login com mensagem de erro
-            header("Location: login.php?error=true");
-            exit;
+    if ($result->num_rows > 0) {
+        // Exiba os cursos afiliados
+        while ($row = $result->fetch_assoc()) {
+            echo "<div class='curso-afiliado'>";
+            echo "<h3>{$row['titulo']}</h3>";
+            echo "<p>{$row['descricao']}</p>";
+            echo "<p><strong>Valor: R$ " . number_format($row['valor'], 2, ',', '.') . "</strong></p>";
+            echo "<p>Data do Curso: {$row['data_curso']}</p>";
+            echo "</div>";
         }
     } else {
-        // Usuário não encontrado
-        // Redirecionar de volta para a página de login com mensagem de erro
-        header("Location: login.php?error=true");
-        exit;
+        echo "Você não está afiliado a nenhum curso.";
     }
 
-    // Fechar a conexão
-    $stmt->close();
+    // Feche a conexão com o banco de dados
     $conn->close();
-}
-?>
+    ?>

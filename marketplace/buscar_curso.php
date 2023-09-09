@@ -29,7 +29,12 @@ if (isset($_GET['id'])) {
         echo "<h3>{$row['titulo']}</h3>";
         echo "<p>{$row['descricao']}</p>";
         echo "<p><strong>Valor: R$ " . number_format($row['valor'], 2, ',', '.') . "</strong></p>";
-        echo "<p>Data do Curso: {$row['data_curso']}</p>";
+
+        // Adicione o link de vendas
+        echo "<p><strong>Link de Venda:</strong> <a href=\"{$row['link_venda']}\" target=\"_blank\">Copiar link de venda</a></p>";
+
+        // Adicione o botão de solicitação de afiliação
+        echo "<button class=\"solicitar-afiliacao-btn\" data-curso-id=\"{$row['id']}\">Solicitar Afiliação</button>";
     } else {
         echo "Curso não encontrado.";
     }

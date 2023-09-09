@@ -187,27 +187,50 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <!-- Exibição de Cursos da Categoria "Variados" -->
                         <br>
                         <div class="cards-container">
-                            <?php foreach ($cursosVariados as $curso) { ?>
-                                <div class="curso-card">
-                                    <img src="<?php echo $curso['imagem_curso']; ?>" alt="Imagem do Curso">
-                                    <div class="desc-cursos-marketplace">
-                                        <h3><?php echo $curso['titulo']; ?></h3>
-                                        <p>
-                                            <?php
-                                            $descricao = $curso['descricao'];
-                                            $descricaoResumida = substr($descricao, 0, 90);
-                                            echo $descricaoResumida;
-                                            if (strlen($descricao) > 90) {
-                                                echo '...';
-                                            }
-                                            ?>
-                                        </p>
-                                        <p><strong>Comissão: R$ <?php echo number_format($curso['valor'], 2, ',', '.'); ?></strong></p>
-                                        <br>
-                                        <button class="ver-mais-btn" data-curso-id="<?php echo $curso['id']; ?>">Ver Mais</button>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                            <?php
+                            // Conecte-se ao banco de dados (substitua com suas credenciais)
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "usuarios_maond";
+
+                            // Crie uma conexão com o banco de dados
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+
+                            // Verifique a conexão
+                            if ($conn->connect_error) {
+                                die("Falha na conexão com o banco de dados: " . $conn->connect_error);
+                            }
+
+                            // Suponha que o ID do usuário seja 1 (você deve adaptar isso à sua autenticação)
+                            $userId = 1;
+
+                            // Consulta SQL para buscar os cursos afiliados pelo usuário
+                            $sql = "SELECT cursos.titulo, cursos.descricao, cursos.valor, cursos.data_curso
+            FROM afiliacoes
+            JOIN cursos ON afiliacoes.curso_id = cursos.id
+            WHERE afiliacoes.usuario_id = $userId";
+
+                            // Execute a consulta
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                // Exiba os cursos afiliados como cartões
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<div class='curso-afiliado'>";
+                                    echo "<h3>{$row['titulo']}</h3>";
+                                    echo "<p>{$row['descricao']}</p>";
+                                    echo "<p><strong>Valor: R$ " . number_format($row['valor'], 2, ',', '.') . "</strong></p>";
+                                    echo "<p>Data do Curso: {$row['data_curso']}</p>";
+                                    echo "</div>";
+                                }
+                            } else {
+                                echo "Você não está afiliado a nenhum curso.";
+                            }
+
+                            // Feche a conexão com o banco de dados
+                            $conn->close();
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -220,79 +243,6 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- JAVASCRIPT -->
     <script src="../js/menu-dashboard.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".ver-mais-btn").click(function(e) {
-                e.preventDefault();
-                var cursoId = $(this).data("curso-id");
-                var detalhesDiv = $("#curso-detalhes");
-
-                // Use Ajax para buscar as informações detalhadas do curso com o ID correspondente
-                $.ajax({
-                    url: "buscar_curso.php",
-                    method: "GET",
-                    data: {
-                        id: cursoId
-                    },
-                    success: function(response) {
-                        // Exiba as informações detalhadas do curso e mostre a div de detalhes adicionais
-                        detalhesDiv.html(response).fadeIn(300);
-                        $("#info-adicionais-curso-" + cursoId).show();
-
-                        // Adicione um evento para solicitar afiliação
-                        $(".solicitar-afiliacao-btn").click(function() {
-                            var cursoId = $(this).data("curso-id");
-
-                            // Envie uma solicitação de afiliação para o servidor
-                            $.ajax({
-                                url: "solicitar_afiliacao.php",
-                                method: "POST",
-                                data: {
-                                    cursoId: cursoId
-                                },
-                                success: function() {
-                                    // Exiba uma mensagem de sucesso
-                                    alert("Solicitação de afiliação enviada com sucesso!");
-                                },
-                                error: function() {
-                                    alert("Erro ao enviar a solicitação de afiliação.");
-                                }
-                            });
-                        });
-                    },
-                    error: function() {
-                        alert("Erro ao buscar detalhes do curso.");
-                    }
-                });
-            });
-
-        // Adicione um evento para fechar as informações detalhadas ao clicar no botão de fechar
-        $(document).on('click', '.fechar-btn', function() {
-            var detalhesDiv = $("#curso-detalhes");
-
-            // Ocultar a div de detalhes
-            detalhesDiv.fadeOut(300, function() {
-                detalhesDiv.empty(); // Limpar o conteúdo após fechar
-            });
-        });
-
-        // Impedir que o clique dentro da div de informações propague para o documento
-        $("#curso-detalhes").on('click', function(event) {
-            event.stopPropagation();
-        });
-
-        // Adicione um evento para fechar as informações ao clicar fora da caixa
-        $(document).on('click', function(event) {
-        var detalhesDiv = $("#curso-detalhes");
-        if (!$(event.target).closest("#curso-detalhes").length && !$(event.target).hasClass("ver-mais-btn")) {
-            detalhesDiv.fadeOut(300, function() {
-                detalhesDiv.empty(); // Limpar o conteúdo após fechar
-            });
-        }
-        });
-        });
-    </script>
 
 </body>
 
