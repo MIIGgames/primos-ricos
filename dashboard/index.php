@@ -93,13 +93,13 @@ $conn->close();
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../afiliacoes/minhas_afiliacoes.php">
                             <i class="ph-bold ph-user"></i>
                             <h3>Meus Afiliados</h3>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="../financeiro/financeiro.php">
                             <i class="ph-bold ph-credit-card"></i>
                             <h3>Financeiro</h3>
                         </a>

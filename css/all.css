@@ -25,6 +25,9 @@
 /* ESTILO CSS - Marketplace */
 @import "marketplace.css";
 
+/* ESTILO CSS - Afiliados */
+@import "afiliacoes.css";
+
 /* ESTILO GERAL */
 * {
     padding: 0;

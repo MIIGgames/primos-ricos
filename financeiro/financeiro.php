@@ -172,58 +172,14 @@ $cursosVariados = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </header>
 
             <div class="dashboard-main">
-                <h2>Minhas Afiliações</h2>
+                <h2>Financeiro</h2>
 
                 <div class="marketplace-main-grid">
                     <div class="container-marketplace">
 
                         <br>
                         <div class="cards-container">
-                            <?php
-                            // Conecte-se ao banco de dados (substitua com suas credenciais)
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "usuarios_maond";
 
-                            // Crie uma conexão com o banco de dados
-                            $conn = new mysqli($servername, $username, $password, $dbname);
-
-                            // Verifique a conexão
-                            if ($conn->connect_error) {
-                                die("Falha na conexão com o banco de dados: " . $conn->connect_error);
-                            }
-
-                            // Suponha que o ID do usuário seja 1 (você deve adaptar isso à sua autenticação)
-                            $userId = 1;
-
-                            // Consulta SQL para buscar as afiliações do usuário com imagens e descrições limitadas
-                            $sql = "SELECT cursos.titulo, cursos.descricao, cursos.valor, cursos.data_curso, cursos.imagem_curso
-            FROM afiliacoes
-            JOIN cursos ON afiliacoes.curso_id = cursos.id
-            WHERE afiliacoes.usuario_id = $userId";
-
-                            // Execute a consulta
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                // Exiba as afiliações como cartões com imagens e descrições limitadas
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<div class='curso-afiliado'>";
-                                    echo "<img class='imagem-curso' src='{$row['imagem_curso']}' alt='Imagem do Curso'>";
-                                    echo "<h3>{$row['titulo']}</h3>";
-                                    echo "<div class='descricao-curso'>{$row['descricao']}</div>";
-                                    echo "<p><strong>Valor: R$ " . number_format($row['valor'], 2, ',', '.') . "</strong></p>";
-                                    echo "<p>Data do Curso: {$row['data_curso']}</p>";
-                                    echo "</div>";
-                                }
-                            } else {
-                                echo "Você não está afiliado a nenhum curso.";
-                            }
-
-                            // Feche a conexão com o banco de dados
-                            $conn->close();
-                            ?>
                         </div>
                     </div>
                 </div>

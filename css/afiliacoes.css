@@ -1,0 +1,42 @@
+.curso-afiliado {
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: calc(33.33% - 20px);
+    /* Distribui em 3 colunas (33.33%) com margem de 10px */
+    box-sizing: border-box;
+}
+
+
+/* Estilo para a descrição limitada a 4 linhas */
+.descricao-curso {
+    max-height: 4.8em;
+    /* Aproximadamente 4 linhas de texto */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+/* Estilo para a imagem do curso */
+.imagem-curso {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilo para tornar responsivo */
+@media (max-width: 768px) {
+    .curso-afiliado {
+        width: calc(50% - 20px);
+        /* Distribui em 2 colunas (50%) com margem de 10px */
+    }
+}
+
+@media (max-width: 480px) {
+    .curso-afiliado {
+        width: 100%;
+        /* Empilha em uma coluna para telas menores */
+    }
+}
